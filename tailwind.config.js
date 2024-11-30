@@ -10,6 +10,9 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        backgroundImage: {
+          'hero-pattern': "url('public\night-sky-background-with-nebula.jpg')",
+        }
       },
     },
   },
