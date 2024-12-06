@@ -1,0 +1,7 @@
+[
+    {
+        "moduleName" : "Image",
+        "acceptedFileTypes" : ["image/jpg","image/jpeg","image/png"],
+        "convertTo" : ["pdf","example"]
+    }
+]

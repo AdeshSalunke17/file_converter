@@ -1,16 +1,18 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFile } from '../redux/fileSlice';
+import CustomSelect from './CustomSelect';
 const FileConvertCard = () => {
     const filesArray = useSelector((state) => state.file.filesArray);
     const dispatch = useDispatch();
+    const {moduleName, acceptedFileTypes, convertTo} = useSelector((state) => state.selectedOption.module) || {};
     const handleFileChange = (event) => {
       const file = event.target.files[0];
       
       if (file) {
         // Validate file type
-        if (file.type !== 'image/jpeg') {
-          alert('Only JPG images are allowed. Please select a valid file.');
+        if (acceptedFileTypes.indexOf(file.type) === -1) {
+          alert('Please select a valid file.');
           return;
         }
         dispatch(setFile(file));
@@ -60,7 +62,7 @@ const FileConvertCard = () => {
         <div className='rounded-lg glass-bg w-5/12 flex py-3'>
         <div className='w-8/12 border border-l-transparent border-t-transparent border-b-transparent'>
         <i className="fa fa-paperclip" aria-hidden="true"></i>
-        <span className="truncate pl-2">{file.name}</span>
+        <span className="truncate pl-2">{file.name.slice(0,15)}...</span>
         </div>
         <div className='w-4/12'>
         <span className="truncate pl-2">1.02 MB</span>
@@ -76,9 +78,7 @@ const FileConvertCard = () => {
         <span className="truncate">Output</span>
         </div>
         <div className='w-4/12'>
-        <select className="bg-transparent text-stone-100 rounded px-2 py-1">
-                <option>Select</option>
-        </select>
+        <CustomSelect options={convertTo}/>
         </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import {store} from './redux/store'
 import ChooseFile from "./components/choosefile";
 import FileConvertCard from "./components/fileconvertcard";
 import Options from "./components/Options";
+import FileContainer from "./components/FileContainer";
 export default function Home() {
   useEffect(() => {
     const tl = gsap.timeline();
@@ -75,13 +76,7 @@ export default function Home() {
       </main>
       <div className="flex flex-col items-center justify-center text-center mt-10">
         <Options/>
-        {/* <div className=" bg-black bg-opacity-70 rounded-lg w-2/3 p-10">
-            <div className="py-10 w-full h-full border-2 border-dashed border-gray-100 rounded-lg flex flex-col items-center justify-center text-center">
-            <DragAndDrop/>
-            <ChooseFile/>
-            <FileConvertCard/>
-          </div>
-        </div> */}
+        <FileContainer/>
       </div>
     </div>
     </Provider>
