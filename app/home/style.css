@@ -1,0 +1,29 @@
+/* styles/globals.css */
+body {
+  background-image: url('C:\Users\Adesh\Desktop\Next Js\send-it-in-any-format\public\night-sky-background-with-nebula.jpg');
+}
+.image-uploader {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .choose-image-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .choose-image-button:hover {
+    background-color: #45a049;
+  }
+  
+  .image-preview img {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
