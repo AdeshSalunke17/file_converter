@@ -1,7 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFile } from '../redux/fileSlice';
+import { setFile, setToFormat } from '../redux/fileSlice';
 import CustomSelect from './CustomSelect';
+import { convertBytesToMb } from '../utility/convertBytestoMb';
+import { callConversionMethod, createZipFromConvertedFiles } from '../actions';
 const FileConvertCard = () => {
     const filesArray = useSelector((state) => state.file.filesArray);
     const dispatch = useDispatch();
@@ -18,21 +20,97 @@ const FileConvertCard = () => {
         dispatch(setFile(file));
       }
     };
+   const handleDropdownSelect = (index, formatTo) => {
+      dispatch(setToFormat({
+        toFormat : formatTo,
+        fileIndex : index
+      }));
+    }
     const convert = async () => {
-      const formData = new FormData();
-      formData.append('image', filesArray[0]);
-      try {
-        // Send the image to the server for PDF conversion
-      const response = await fetch('/api/convert', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to convert image to PDF');
-      }
-      } catch (error) {
+//       const formData = new FormData();
+// filesArray.forEach((file, index) => {
+//   // Append the file as a Blob with a unique name for each file
+//   formData.append(`file_${index}`, file.fileObject);
+//   // Append the toFormat string
+//   formData.append(`format_${index}`, file.toFormat);
+// });
+      
+//       try {
+//         const response = await fetch("/api/convert", {
+//           method: "POST",
+//           body: formData,
+//         });
+    
+//         if (!response.ok) {
+//           throw new Error("Failed to generate ZIP file.");
+//         }
+    
+//         // Get the ZIP Blob from the response
+//         const zipBlob = await response.blob();
+    
+//         // Trigger file download
+//         const url = URL.createObjectURL(zipBlob);
+//         const a = document.createElement("a");
+//         a.href = url;
+//         a.download = "converted_files.zip";
+//         a.click();
+//         URL.revokeObjectURL(url);
+//       } catch (error) {
+//         alert("Conversion failed: " + error.message);
+//       }
+      // try {
+      //   const zipResponse = await createZipFromConvertedFiles(filesArray);
+      //   console.log(zipResponse);
         
+      //   const zipBlob = await zipResponse.blob();
+
+      // // Trigger file download
+      // const url = URL.createObjectURL(zipBlob);
+      // const a = document.createElement("a");
+      // a.href = url;
+      // a.download = "converted_files.zip";
+      // a.click();
+      // URL.revokeObjectURL(url);
+      // //   filesArray.map( async (file, index) => {
+      // //     const convertedBlobData = await callConversionMethod(moduleName, file.fileObject, file.toFormat);
+      // //     const url = URL.createObjectURL(convertedBlobData);
+  
+      // // // Automatically download the file
+      // // const a = document.createElement("a");
+      // // a.href = url;
+      // // // a.download = `converted.${targetFormat}`;
+      // // a.download = 'converted.jpeg'
+      // // a.style.display = "none";
+      // // document.body.appendChild(a);
+      // // a.click();
+      // // document.body.removeChild(a);
+      // //   });
+      // } catch (error) {
+      //   alert("Conversion failed: " + error.message);
+      // }
+
+      try {
+        filesArray.map(async file => {
+          const convertedBlobData = await callConversionMethod(moduleName, file.fileObject, file.toFormat);
+          // Create a temporary URL for the Blob
+        const downloadUrl = URL.createObjectURL(convertedBlobData);
+
+        // Create an <a> element for downloading the file
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = `${file.fileObject.name.split('.')[0]}_converted.${file.toFormat}`;
+
+        // Append the element to the body and trigger a click event
+        document.body.appendChild(a);
+        a.click();
+
+        // Clean up by removing the element and revoking the object URL
+        document.body.removeChild(a);
+        URL.revokeObjectURL(downloadUrl);
+        })
+        
+      } catch (error) {
+        alert("Conversion failed: " + error.message);
       }
     }
   return (
@@ -49,7 +127,7 @@ const FileConvertCard = () => {
         <input
         id="image-input-multi"
         type="file"
-        accept="image/*"
+        accept={acceptedFileTypes[0].split('/')[0]+'/*'}
         onChange={handleFileChange}
         style={{ display: 'none' }}
       />
@@ -57,15 +135,16 @@ const FileConvertCard = () => {
 
       {
         filesArray.map((file, index) => {
+          const fileObject = file.fileObject;
           return (
 <div className='w-full px-16 flex justify-between py-5' key={index}>
         <div className='rounded-lg glass-bg w-5/12 flex py-3'>
         <div className='w-8/12 border border-l-transparent border-t-transparent border-b-transparent'>
         <i className="fa fa-paperclip" aria-hidden="true"></i>
-        <span className="truncate pl-2">{file.name.slice(0,15)}...</span>
+        <span className="truncate pl-2">{fileObject.name.slice(0,15)}...</span>
         </div>
         <div className='w-4/12'>
-        <span className="truncate pl-2">1.02 MB</span>
+        <span className="truncate pl-2">{convertBytesToMb(fileObject.size)} MB</span>
         </div>
         </div>
         <div className='w-2/12'>
@@ -78,7 +157,7 @@ const FileConvertCard = () => {
         <span className="truncate">Output</span>
         </div>
         <div className='w-4/12'>
-        <CustomSelect options={convertTo}/>
+        <CustomSelect options={convertTo} index={index} handleDropdownSelect= {handleDropdownSelect}/>
         </div>
         </div>
       </div>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 
-const CustomSelect = ({options}) => {
+const CustomSelect = ({options, index, handleDropdownSelect}) => {
     const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('Select');
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleSelect = (option) => {
     setSelectedOption(option);
+    handleDropdownSelect(index, option);
     setIsOpen(false);
   };
   return (
@@ -37,7 +38,7 @@ const CustomSelect = ({options}) => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute z-10 w-full bg-gray-900 text-white rounded-md mt-2 shadow-lg">
+        <div className="absolute z-50 w-full bg-gray-900 text-white rounded-md mt-2 shadow-lg">
           <ul className="py-2">
             {options.map((option) => (
               <li

@@ -38,6 +38,7 @@ const DragAndDrop = () => {
         setErrorMessage("");
       } else {
         setErrorMessage("Please drop a valid PDF file.");
+        alert('Please select a valid file.');
       }
     }
   };

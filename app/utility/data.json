@@ -2,6 +2,11 @@
     {
         "moduleName" : "Image",
         "acceptedFileTypes" : ["image/jpg","image/jpeg","image/png"],
-        "convertTo" : ["pdf","example"]
+        "convertTo" : ["pdf","jpg", "jpeg"]
+    },
+    {
+        "moduleName" : "Document",
+        "acceptedFileTypes" : ["application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/pdf","text/plain"],
+        "convertTo" : ["DOCS","PDF", "TXT"]
     }
 ]
