@@ -3,7 +3,8 @@ import sharp from "sharp";
 import { PDFDocument, StandardFonts } from "pdf-lib";
 
 export const imageModuleConversion = async (file, targetFormat) => {
-    if (!file || !["jpg", "jpeg", "png", "pdf"].includes(targetFormat)) {
+  const imageModuleData = moduleData.filter(data => data.moduleName === 'Image')[0];
+    if (!file || !imageModuleData.convertTo.includes(targetFormat)) {
         throw new Error("Invalid file or format");
       }
     

@@ -34,7 +34,7 @@ const ChooseFile = () => {
           <input
         id="image-input"
         type="file"
-        accept={acceptedFileTypes[0].split('/')[0]+'/*'}
+        accept={acceptedFileTypes.join(',')}
         onChange={handleFileChange}
         style={{ display: 'none' }}
       />
