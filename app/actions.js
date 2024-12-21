@@ -2,12 +2,14 @@
 
 import JSZip from "jszip";
 import { documentModuleConversion } from "./utility/documentModuleConverter";
+import { codemarkUpModuleConversion } from "./utility/codemarkupModuleConversion";
 const { imageModuleConversion } = require("./utility/imageModuleConversion");
 
 export const callConversionMethod = async (moduleName, file, formatTo) => {
     switch (moduleName) {
         case "Image": return imageModuleConversion(file, formatTo);
         case "Document": return documentModuleConversion(file, formatTo);
+        case "Code/Markup": return codemarkUpModuleConversion(file, formatTo);
         default: break;
     }
 
