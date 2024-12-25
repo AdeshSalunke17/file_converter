@@ -1,7 +1,8 @@
 'use client'
 import React, { useState } from 'react'
+import Image from 'next/image'
 import './style.css'
-const page = () => {
+const Page = () => {
     const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -86,7 +87,7 @@ const mailResponse = await fetch('/api/sendmail',{
       {imagePreview && (
         <>
         <div className="image-preview">
-          <img src={imagePreview} alt="Selected" style={{ maxWidth: '100%', maxHeight: '300px' }} />
+          <Image src={imagePreview} alt="Selected" style={{ maxWidth: '100%', maxHeight: '300px' }} />
         </div>
         <button
         className="convert-button"
@@ -101,4 +102,4 @@ const mailResponse = await fetch('/api/sendmail',{
   )
 }
 
-export default page
+export default Page
