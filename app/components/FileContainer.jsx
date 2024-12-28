@@ -29,7 +29,7 @@ const FileContainer = () => {
         }
       }, [selectedOption]);
   return (
-    <div className={`bg-black bg-opacity-70 rounded-lg w-2/3 p-10 ${!selectedOption && 'hidden'}`}
+    <div className={`bg-black bg-opacity-70 rounded-lg sm:w-2/3 w-10/12 sm:p-10 p-3 ${!selectedOption && 'hidden'}`}
     ref={containerRef}
     >
             <div className="py-10 w-full h-full border-2 border-dashed border-gray-100 rounded-lg flex flex-col items-center justify-center text-center">

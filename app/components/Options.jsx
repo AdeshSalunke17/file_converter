@@ -43,7 +43,7 @@ const Options = () => {
   return (
     <div className={`rounded-lg w-2/3 p-10 flex flex-wrap ${selectedOption && 'hidden'}`}>
       {['Document', 'Image', 'Code/Markup', 'Spreadsheet', 'Compressed Files'].map((option, index) => (
-        <div className="w-4/12 p-4" key={option}>
+        <div className="w-full sm:w-6/12 md:w-4/12 p-4" key={option}>
           <div
             ref={(el) => (optionRefs.current[index] = el)}
             className="w-full h-full bg-black bg-opacity-70 p-3 text-green-400 items-center cursor-pointer rounded-lg"

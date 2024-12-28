@@ -51,7 +51,7 @@ export default function Home() {
     <Provider store={store}>
     <div className="bg-cover bg-center bg-[url('/public/night-sky-background-with-nebula.jpg')] min-h-screen text-white">
       {/* Navbar */}
-      <nav className="flex justify-between items-center px-20 py-4 bg-black bg-opacity-50">
+      <nav className="flex justify-between items-center sm:px-20 px-5 py-4 bg-black bg-opacity-50">
         <div className="text-2xl font-bold">Logoipsum</div>
         <ul className="hidden md:flex space-x-10 text-lg">
           <li className="hover:text-green-400 cursor-pointer">Home</li>

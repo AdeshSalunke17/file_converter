@@ -52,7 +52,7 @@ const DragAndDrop = () => {
     onDrop={handleDrop}
     >
             <i className="fa fa-download text-green-500 text-3xl"></i>
-            <p className="text-2xl text-gray-400 my-4">Drag&Drop {selectedOption} here</p>
+            <p className="sm:text-2xl text-lg text-gray-400 my-4">Drag&Drop {selectedOption} here</p>
             </div>
     :
     <></>

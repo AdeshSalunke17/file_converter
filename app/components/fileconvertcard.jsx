@@ -137,13 +137,13 @@ const FileConvertCard = () => {
         filesArray.map((file, index) => {
           const fileObject = file.fileObject;
           return (
-<div className='w-full px-16 flex justify-between py-5' key={index}>
+<div className='w-full md:px-16 px-5 flex justify-between py-5' key={index}>
         <div className='rounded-lg glass-bg w-5/12 flex py-3'>
-        <div className='w-8/12 border border-l-transparent border-t-transparent border-b-transparent'>
+        <div className='md:w-8/12 w-full border border-l-transparent border-t-transparent border-b-transparent border-r-transparent md:border-r-white'>
         <i className="fa fa-paperclip" aria-hidden="true"></i>
-        <span className="truncate pl-2">{fileObject.name.slice(0,15)}...</span>
+        <span className="truncate pl-2">{fileObject.name.slice(0,10)}...</span>
         </div>
-        <div className='w-4/12'>
+        <div className='w-4/12 md:block hidden'>
         <span className="truncate pl-2">{convertBytesToMb(fileObject.size)} MB</span>
         </div>
         </div>
@@ -153,10 +153,10 @@ const FileConvertCard = () => {
         </button>
         </div>
         <div className='rounded-lg glass-bg w-5/12 flex py-3'>
-        <div className='w-8/12 border border-l-transparent border-t-transparent border-b-transparent text-left pl-10'>
+        <div className='w-8/12 border border-l-transparent border-t-transparent border-b-transparent text-left pl-10 hidden md:block'>
         <span className="truncate">Output</span>
         </div>
-        <div className='w-4/12'>
+        <div className='md:w-4/12 w-full'>
         <CustomSelect options={convertTo} index={index} handleDropdownSelect= {handleDropdownSelect}/>
         </div>
         </div>
