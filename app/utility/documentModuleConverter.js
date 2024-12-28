@@ -6,8 +6,8 @@ import { Document, Packer, Paragraph } from "docx";
 import { PDFDocument } from "pdf-lib";
 import { readFileAsArrayBuffer } from "./readFileAsArrayBuffer";
 import moduleData from '../utility/data.json'
-import { getDocument } from "pdfjs-dist/legacy/build/pdf";
-import "pdfjs-dist/legacy/build/pdf.worker.entry";
+// import { getDocument } from "pdfjs-dist/legacy/build/pdf";
+// import "pdfjs-dist/legacy/build/pdf.worker.entry";
 
 export const documentModuleConversion = async (file, targetFormat) => {
     const documentModuleData = moduleData.filter(data => data.moduleName === 'Document')[0];

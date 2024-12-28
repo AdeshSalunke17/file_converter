@@ -62,7 +62,6 @@ npm run start
 | pdf-lib               | PDF generation and manipulation             |
 | jspdf                 | PDF document creation                       |
 | jszip                 | Zip file compression                        |
-| multer                | Middleware for file uploads                 |
 | sharp                 | Image processing library                    |
 | docx                  | Generate DOCX files                         |
 | mammoth               | Convert DOCX to HTML/TXT                    |
