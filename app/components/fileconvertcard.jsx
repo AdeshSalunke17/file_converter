@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFile, setToFormat } from '../redux/fileSlice';
 import CustomSelect from './CustomSelect';
 import { convertBytesToMb } from '../utility/convertBytestoMb';
 import { callConversionMethod, createZipFromConvertedFiles } from '../actions';
+import { validate } from '../utility/validate';
+import Modal from './Modal';
 const FileConvertCard = () => {
     const filesArray = useSelector((state) => state.file.filesArray);
     const dispatch = useDispatch();
@@ -26,6 +28,7 @@ const FileConvertCard = () => {
         fileIndex : index
       }));
     }
+    const [isValidate, setIsValidate] = useState(true);
     const convert = async () => {
 //       const formData = new FormData();
 // filesArray.forEach((file, index) => {
@@ -88,7 +91,7 @@ const FileConvertCard = () => {
       // } catch (error) {
       //   alert("Conversion failed: " + error.message);
       // }
-
+    if(validate(filesArray)) {
       try {
         filesArray.map(async file => {
           const convertedBlobData = await callConversionMethod(moduleName, file.fileObject, file.toFormat);
@@ -112,6 +115,9 @@ const FileConvertCard = () => {
       } catch (error) {
         alert("Conversion failed: " + error.message);
       }
+    } else {
+      setIsValidate(false);
+    }
     }
   return (
     filesArray.length > 0 && 
@@ -138,7 +144,7 @@ const FileConvertCard = () => {
           const fileObject = file.fileObject;
           return (
 <div className='w-full md:px-16 px-5 flex justify-between py-5' key={index}>
-        <div className='rounded-lg glass-bg w-5/12 flex py-3'>
+        <div className='rounded-lg glass-bg w-5/12 flex py-3 border border-green-400'>
         <div className='md:w-8/12 w-full border border-l-transparent border-t-transparent border-b-transparent border-r-transparent md:border-r-white'>
         <i className="fa fa-paperclip" aria-hidden="true"></i>
         <span className="truncate pl-2">{fileObject.name.slice(0,10)}...</span>
@@ -152,7 +158,7 @@ const FileConvertCard = () => {
         <i className="fa fa-arrow-right" aria-hidden="true"></i>
         </button>
         </div>
-        <div className='rounded-lg glass-bg w-5/12 flex py-3'>
+        <div className={`rounded-lg glass-bg w-5/12 flex py-3 ${file.toFormat && 'border border-green-400'}`}>
         <div className='w-8/12 border border-l-transparent border-t-transparent border-b-transparent text-left pl-10 hidden md:block'>
         <span className="truncate">Output</span>
         </div>
@@ -179,6 +185,9 @@ const FileConvertCard = () => {
           </div>
           <p className="text-sm text-center mt-2">49%</p>
         </div> */}
+        <Modal isOpen={!isValidate} onClose={() => setIsValidate(true)}>
+          <h3 className='text-white'>Please select option from dropdown to convert files</h3>
+        </Modal>
         </>
   )
 }

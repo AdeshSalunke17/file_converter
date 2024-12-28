@@ -1,6 +1,7 @@
 'use server'
 import sharp from "sharp";
 import { PDFDocument, StandardFonts } from "pdf-lib";
+import moduleData from '../utility/data.json'
 
 export const imageModuleConversion = async (file, targetFormat) => {
   const imageModuleData = moduleData.filter(data => data.moduleName === 'Image')[0];
@@ -24,13 +25,23 @@ export const imageModuleConversion = async (file, targetFormat) => {
         } else {
             throw new Error("Unsupported image format for PDF conversion.");
         }
-        const { width, height } = image.scale(0.5);
-        page.drawImage(image, {
-            x: page.getWidth() / 2 - width / 2,
-            y: page.getHeight() / 2 - height / 2,
-            width,
-            height
-        });
+        // Get image and page dimensions
+    const imgDims = image.scale(1);  // Use full scale initially
+    const pageWidth = page.getWidth();
+    const pageHeight = page.getHeight();
+    
+    // Calculate the aspect ratio and fit the image inside the page
+    const scale = Math.min(pageWidth / imgDims.width, pageHeight / imgDims.height);
+    const imgWidth = imgDims.width * scale;
+    const imgHeight = imgDims.height * scale;
+
+    // Center the image on the page
+    page.drawImage(image, {
+      x: (pageWidth - imgWidth) / 2,
+      y: (pageHeight - imgHeight) / 2,
+      width: imgWidth,
+      height: imgHeight
+    });
         convertedBuffer = await pdfDoc.save();
       } else {
         // Convert to image (jpg, jpeg, png)
