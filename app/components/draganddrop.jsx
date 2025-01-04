@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setFile } from '../redux/fileSlice';
+import { setFile } from '../features/fileSlice';
 import { selectedOptionSlice } from '../features/optionSlice';
 const DragAndDrop = () => {
     const [file, setLocalFile] = useState(null);

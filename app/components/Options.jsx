@@ -2,12 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { gsap } from 'gsap';
 import { setSelectedOption } from '../features/optionSlice';
+import Loader from './Loader';
 
 const Options = () => {
   const dispatch = useDispatch();
   const selectedOption = useSelector((state) => state.selectedOption.selectedOption);
   const optionRefs = useRef([]);
-
+  
   useEffect(() => {
     // Initial animation for all options
     gsap.from(optionRefs.current, {
@@ -42,7 +43,7 @@ const Options = () => {
   };
   return (
     <div className={`rounded-lg w-2/3 p-10 flex flex-wrap ${selectedOption && 'hidden'}`}>
-      {['Document', 'Image', 'Code/Markup', 'Spreadsheet', 'Compressed Files'].map((option, index) => (
+      {['Document', 'Image', 'Code/Markup'].map((option, index) => (
         <div className="w-full sm:w-6/12 md:w-4/12 p-4" key={option}>
           <div
             ref={(el) => (optionRefs.current[index] = el)}

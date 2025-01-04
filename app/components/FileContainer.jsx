@@ -4,6 +4,7 @@ import ChooseFile from './choosefile'
 import FileConvertCard from './fileconvertcard'
 import { useSelector } from 'react-redux'
 import { gsap } from 'gsap';
+import Loader from './Loader'
 
 const FileContainer = () => {
     const selectedOption = useSelector(state => state.selectedOption.selectedOption);
@@ -28,7 +29,9 @@ const FileContainer = () => {
           );
         }
       }, [selectedOption]);
+      const loading = useSelector((state) => state.loader.loadingState);
   return (
+    <>
     <div className={`bg-black bg-opacity-70 rounded-lg sm:w-2/3 w-10/12 sm:p-10 p-3 ${!selectedOption && 'hidden'}`}
     ref={containerRef}
     >
@@ -38,6 +41,8 @@ const FileContainer = () => {
             <FileConvertCard/>
           </div>
     </div>
+    {loading && <Loader/>}
+    </>
   )
 }
 

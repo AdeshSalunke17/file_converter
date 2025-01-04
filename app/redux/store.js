@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import fileSliceReducer from './fileSlice'
+import fileSliceReducer from '../features/fileSlice'
 import selectedOptionReducer  from '../features/optionSlice'
+import loaderReducer from '../features/loaderSlice'
 export const store = configureStore({
   reducer: {
     file : fileSliceReducer,
-    selectedOption : selectedOptionReducer
+    selectedOption : selectedOptionReducer,
+    loader : loaderReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -3,7 +3,7 @@
 import gsap from "gsap";
 import { useEffect, useState } from "react";
 import DragAndDrop from "./components/draganddrop";
-import { Provider } from 'react-redux';
+import { Provider, us, useSelector } from 'react-redux';
 import {store} from './redux/store'
 import ChooseFile from "./components/choosefile";
 import FileConvertCard from "./components/fileconvertcard";
@@ -46,7 +46,6 @@ export default function Home() {
       ease: "power4.out",  // Smooth animation easing
     });
   }, []);
-  
   return (
     <Provider store={store}>
     <div className="bg-cover bg-center bg-[url('/public/night-sky-background-with-nebula.jpg')] min-h-screen text-white">

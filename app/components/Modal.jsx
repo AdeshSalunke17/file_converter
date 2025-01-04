@@ -21,8 +21,6 @@ const Modal = ({ isOpen, onClose, children }) => {
       });
     }
   }, [isOpen, onClose]);
-  
-  
 
   if (!isOpen) return null;
 

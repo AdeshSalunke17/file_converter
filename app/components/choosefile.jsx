@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setFile } from '../redux/fileSlice';
+import { setFile } from '../features/fileSlice';
 
 const ChooseFile = () => {
     const filesArray = useSelector((state) => state.file.filesArray);

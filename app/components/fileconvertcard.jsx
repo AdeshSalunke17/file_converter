@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFile, setToFormat } from '../redux/fileSlice';
+import { setFile, setToFormat } from '../features/fileSlice';
 import CustomSelect from './CustomSelect';
 import { convertBytesToMb } from '../utility/convertBytestoMb';
 import { callConversionMethod, createZipFromConvertedFiles } from '../actions';
 import { validate } from '../utility/validate';
 import Modal from './Modal';
+import { setLoader } from '../features/loaderSlice';
+import Loader from './Loader';
 const FileConvertCard = () => {
     const filesArray = useSelector((state) => state.file.filesArray);
     const dispatch = useDispatch();
@@ -29,6 +31,7 @@ const FileConvertCard = () => {
       }));
     }
     const [isValidate, setIsValidate] = useState(true);
+    const loading = useSelector((state) => state.loader.loadingState);
     const convert = async () => {
 //       const formData = new FormData();
 // filesArray.forEach((file, index) => {
@@ -93,8 +96,11 @@ const FileConvertCard = () => {
       // }
     if(validate(filesArray)) {
       try {
+        dispatch(setLoader(true));
         filesArray.map(async file => {
           const convertedBlobData = await callConversionMethod(moduleName, file.fileObject, file.toFormat);
+          console.log(convertedBlobData);
+          
           // Create a temporary URL for the Blob
         const downloadUrl = URL.createObjectURL(convertedBlobData);
 
@@ -110,8 +116,11 @@ const FileConvertCard = () => {
         // Clean up by removing the element and revoking the object URL
         document.body.removeChild(a);
         URL.revokeObjectURL(downloadUrl);
-        })
-        
+        });
+        setTimeout(() => {
+          dispatch(setLoader(false));
+        }, 2000);
+
       } catch (error) {
         alert("Conversion failed: " + error.message);
       }
@@ -175,16 +184,6 @@ const FileConvertCard = () => {
         >
           Convert <i className="fa fa-arrow-right" aria-hidden="true"></i>
         </button>
-
-        {/* <div className="mt-6">
-          <div className="bg-gray-700 h-2 rounded-full">
-            <div
-              className="bg-blue-600 h-full rounded-full"
-              style={{ width: "49%" }}
-            ></div>
-          </div>
-          <p className="text-sm text-center mt-2">49%</p>
-        </div> */}
         <Modal isOpen={!isValidate} onClose={() => setIsValidate(true)}>
           <h3 className='text-white'>Please select option from dropdown to convert files</h3>
         </Modal>
