@@ -1,7 +1,9 @@
 'use client'
 import React, { useEffect } from 'react'
 import gsap from "gsap";
-const Main = ({t}) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { setTranslation } from '../features/translationSlice';
+const Main = () => {
     useEffect(() => {
         const tl = gsap.timeline();
     
@@ -38,10 +40,15 @@ const Main = ({t}) => {
           ease: "power4.out",  // Smooth animation easing
         });
       }, []);
+      // const dispatch = useDispatch();
+      // useEffect(() => {
+      //   dispatch(setTranslation(translationObject));
+      // },[]);
+      const t = useSelector(state => state.translation.t);
   return (
     <>
         <h1 className="text-4xl md:text-6xl font-extrabold leading-snug heading">
-          Convert your <span className="text-green-400">file easily</span>
+         {t.head1} <span className="text-green-400">{t.head2}</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-300 max-w-2xl animated-text">
           {/* Convert your audio, video, and other files from one format to another

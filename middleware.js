@@ -1,34 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
-let locales = ["en", "zh", "fr"];
+
+let locales = ["en", "in", "fr", "sp"];
 let defaultLocale = "en";
-// Get the preferred locale, similar to the above or using a library
+
 function getLocale(request) {
     return defaultLocale;
 }
+
 export function middleware(request) {
-    // Check if there is any supported locale in the pathname
     const { pathname } = request.nextUrl;
+
+    // Skip static files (images, CSS, JS, etc.)
+    if (pathname.startsWith("/_next/") || pathname.startsWith("/public/") || pathname.match(/\.(png|jpg|jpeg|gif|svg|webp|css|js|ico)$/)) {
+        return;
+    }
+
     const pathnameHasLocale = locales.some(
       (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
     );
-    console.log("has locale", pathnameHasLocale);
-    
-  ​
     if (pathnameHasLocale) return;
-  ​
-    // Redirect if there is no locale
+
     const locale = getLocale(request);
     request.nextUrl.pathname = `/${locale}${pathname}`;
-    // e.g. incoming request is /products
-    // The new URL is now /en-US/products
     return NextResponse.redirect(request.nextUrl);
-  }
-  ​
-  export const config = {
+}
+
+export const config = {
     matcher: [
-      // Skip all internal paths (_next)
-      "/((?!_next).*)",
-      // Optional: only run on root (/) URL
-      // '/'
+      "/((?!_next|_public|.*\\..*).*)",
     ],
-  };
+};

@@ -32,6 +32,7 @@ const FileConvertCard = () => {
     }
     const [isValidate, setIsValidate] = useState(true);
     const loading = useSelector((state) => state.loader.loadingState);
+    const t = useSelector(state => state.translation.t);
     const convert = async () => {
 //       const formData = new FormData();
 // filesArray.forEach((file, index) => {
@@ -133,11 +134,11 @@ const FileConvertCard = () => {
     
       <>
       <div className='flex justify-center'>
-        <h4 className='mt-2'>Add More Files</h4>
+        <h4 className='mt-2'>{t.fileCard.addMore}</h4>
         <button className="ml-4 glass-bg text-white rounded-sm px-5 py-2 mb-6 font-extralight"
         onClick={() => document.getElementById('image-input-multi').click()}
         >
-        <i className="fa fa-paperclip" aria-hidden="true"></i> Choose file 
+        <i className="fa fa-paperclip" aria-hidden="true"></i> {t.fileCard.choose}
         </button>
         <input
         id="image-input-multi"
@@ -169,7 +170,7 @@ const FileConvertCard = () => {
         </div>
         <div className={`rounded-lg glass-bg w-5/12 flex py-3 ${file.toFormat && 'border border-green-400'}`}>
         <div className='w-8/12 border border-l-transparent border-t-transparent border-b-transparent text-left pl-10 hidden md:block'>
-        <span className="truncate">Output</span>
+        <span className="truncate">{t.fileCard.output}</span>
         </div>
         <div className='md:w-4/12 w-full'>
         <CustomSelect options={convertTo} index={index} handleDropdownSelect= {handleDropdownSelect}/>
@@ -182,10 +183,10 @@ const FileConvertCard = () => {
         <button className=" text-white rounded-sm py-4 mt-6 glass-bg px-7"
         onClick={convert}
         >
-          Convert <i className="fa fa-arrow-right" aria-hidden="true"></i>
+          {t.fileCard.convert} <i className="fa fa-arrow-right" aria-hidden="true"></i>
         </button>
         <Modal isOpen={!isValidate} onClose={() => setIsValidate(true)}>
-          <h3 className='text-white'>Please select option from dropdown to convert files</h3>
+          <h3 className='text-white'>{t.fileCard.selectOptionModalText}</h3>
         </Modal>
         </>
   )
