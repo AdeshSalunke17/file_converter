@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setFile } from '../features/fileSlice';
-import { selectedOptionSlice } from '../features/optionSlice';
 const DragAndDrop = () => {
     const [file, setLocalFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -11,6 +10,7 @@ const DragAndDrop = () => {
   const filesArray = useSelector((state) => state.file.filesArray)
   const selectedOption = useSelector(state => state.selectedOption.selectedOption);
   const {moduleName, acceptedFileTypes, convertTo} = useSelector((state) => state.selectedOption.module) || {};
+  const t = useSelector(state => state.translation.t);
   const handleDragEnter = (e) => {
     e.preventDefault();
     setIsDragging(true);
@@ -52,7 +52,7 @@ const DragAndDrop = () => {
     onDrop={handleDrop}
     >
             <i className="fa fa-download text-green-500 text-3xl"></i>
-            <p className="sm:text-2xl text-lg text-gray-400 my-4">Drag&Drop {selectedOption} here</p>
+            <p className="sm:text-2xl text-lg text-gray-400 my-4">{t.dragAndDrop.text1} {selectedOption} {t.dragAndDrop.text2}</p>
             </div>
     :
     <></>

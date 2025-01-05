@@ -1,0 +1,26 @@
+{
+    "head1": "Convierte tu",
+    "head2": "archivo fácilmente",
+    "headDesc": "¡Convierte tus archivos de audio, video y otros formatos en línea de forma gratuita!",
+    "navbar": {
+        "home": "Inicio",
+        "lang": "Idioma",
+        "share": "Compartir",
+        "faq": "Preguntas Frecuentes",
+        "getStarted": "Empezar"
+    },
+    "dragAndDrop": {
+        "text1": "Arrastrar y Soltar",
+        "text2": "aquí"
+    },
+    "Choose": {
+        "text": "Elegir"
+    },
+    "fileCard": {
+        "addMore": "Agregar Más Archivos",
+        "choose": "Elegir archivo",
+        "convert": "Convertir",
+        "output": "Salida",
+        "selectOptionModalText": "Por favor, selecciona una opción del menú desplegable para convertir archivos"
+    }
+}

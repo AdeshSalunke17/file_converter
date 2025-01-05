@@ -1,0 +1,26 @@
+{
+    "head1" : "Convert your",
+    "head2" : "file easily",
+    "headDesc" : "Convert your audio, video, and other files from one format to another online for free!",
+    "navbar" : {
+        "home": "Home",
+        "lang": "Language",
+        "share": "Share",
+        "faq": "FAQ",
+        "getStarted": "Get Started"
+    },
+    "dragAndDrop": {
+        "text1": "Drag&Drop",
+        "text2": "here"
+    },
+    "Choose": {
+        "text": "Choose"
+    },
+    "fileCard": {
+        "addMore": "Add More Files",
+        "choose": "Choose file",
+        "convert": "Convert",
+        "output": "Output",
+        "selectOptionModalText": "Please select option from dropdown to convert files"
+    }
+}
