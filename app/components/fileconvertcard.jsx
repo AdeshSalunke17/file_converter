@@ -133,7 +133,7 @@ const FileConvertCard = () => {
     filesArray.length > 0 && 
     
       <>
-      <div className='flex justify-center'>
+      <div className='hidden sm:flex justify-center'>
         <h4 className='mt-2'>{t.fileCard.addMore}</h4>
         <button className="ml-4 glass-bg text-white rounded-sm px-5 py-2 mb-6 font-extralight"
         onClick={() => document.getElementById('image-input-multi').click()}
